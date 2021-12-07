@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 105px;
+  background-color: #16abf8;
+  div {
+    max-width: 1000px;
+    width: 100%;
+  }
+}
+
+.title {
+  color: #fff;
+  width: 100%;
+  margin: auto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+}
