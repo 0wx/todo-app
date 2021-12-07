@@ -1,15 +1,21 @@
 .root {
   min-height: 100vh;
   width: 100vw;
-  background-color: #e5e5e5;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 20px;
   .wrapper {
+    display: flex;
     max-width: 1000px;
+    flex-grow: 1;
+    width: 100%;
   }
 }

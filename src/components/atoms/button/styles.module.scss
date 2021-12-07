@@ -1,0 +1,26 @@
+.btn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 45px;
+  border: 0;
+  padding: 13.5px 29px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: var(--main-color);
+  border: 2px solid #e5e5e5;
+  color: #fff;
+  min-width: 170px;
+  ._label {
+    font-size: 18px;
+  }
+}
+.btn:hover {
+  border: 2px solid var(--main-color);
+}
+.disable {
+  cursor: not-allowed;
+  background-color: #aaa;
+}

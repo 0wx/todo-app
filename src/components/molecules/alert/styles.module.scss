@@ -1,0 +1,22 @@
+.container {
+  max-height: 355px;
+  max-width: 490px;
+  left: 0px;
+  top: 0px;
+  border-radius: 12px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  padding: 50px 63px 43px 63px;
+}
+.btn {
+  display: flex;
+
+}
+
+.overlay {
+  background-color: black;
+}

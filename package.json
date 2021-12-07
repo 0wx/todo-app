@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -11,8 +14,12 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "axios": "^0.24.0",
+    "nanoid": "^3.1.30",
     "react": "^17.0.2",
+    "react-confirm-alert": "^2.7.0",
     "react-dom": "^17.0.2",
+    "react-loading": "^2.0.3",
+    "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "sass": "^1.44.0",
     "typescript": "^4.1.2",
@@ -23,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier -w './src/**/**.*{ts,json}'"
+    "format": "prettier -w './src/**/**.*{ts,json,scss}'"
   },
   "eslintConfig": {
     "extends": [

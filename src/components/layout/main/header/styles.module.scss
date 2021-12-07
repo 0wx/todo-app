@@ -4,10 +4,11 @@
   align-items: center;
   width: 100vw;
   height: 105px;
-  background-color: #16abf8;
+  background-color: var(--main-color);
   div {
     max-width: 1000px;
     width: 100%;
+    margin: 0 30px;
   }
 }
 

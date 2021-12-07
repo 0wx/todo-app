@@ -1,0 +1,38 @@
+.activityCard {
+  box-shadow: 0 4px 8px rgb(0 0 0 / 15%);
+  width: 177px;
+  height: 177px;
+  margin: 13px 10px;
+  border-radius: 12px;
+  padding: 22px 26px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.link {
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  flex-grow: 1;
+}
+.activityBody {
+
+  width: 100%;
+  h4 {
+    margin: 0;
+    color: #222;
+    font-weight: 700;
+    font-size: 24px;
+  }
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activityTime {
+  color: #888;
+}

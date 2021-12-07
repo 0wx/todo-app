@@ -1,25 +1,6 @@
-import React from 'react';
-import logo from './logo.svg';
-import { MainLayout } from './components/layout';
+import { Home } from './pages'
 function App() {
-  return (
-    <MainLayout>
-      <header>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </MainLayout>
-  );
+  return <Home />
 }
 
-export default App;
+export default App
