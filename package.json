@@ -21,7 +21,6 @@
     "axios": "^0.24.0",
     "nanoid": "^3.1.30",
     "react": "^17.0.2",
-    "react-confirm-alert": "^2.7.0",
     "react-dom": "^17.0.2",
     "react-loading": "^2.0.3",
     "react-router-dom": "^6.0.2",

@@ -4,16 +4,11 @@ import { ActivitiesData } from 'todo-types'
 import { dateFormater } from '../../../helpers/dateFormater'
 import { TrashButton } from '../../atoms'
 import { Alert } from '../'
-import { confirmAlert } from 'react-confirm-alert'
 import '../../../styles/react-confirm-alert.scss'
+import { useState } from 'react'
+import { Modal } from '../../drawer'
 
-const {
-  activityCard,
-  activityBody,
-  cardFooter,
-  activityTime,
-  link,
-} = styles
+const { activityCard, activityBody, cardFooter, activityTime, link } = styles
 
 const ActivityCard: React.FC<ActivitiesData & { onRemove: () => void }> = ({
   id,
@@ -21,6 +16,9 @@ const ActivityCard: React.FC<ActivitiesData & { onRemove: () => void }> = ({
   created_at,
   onRemove,
 }) => {
+  const [show, setShow] = useState<boolean>(false)
+
+  const handleClose = () => setShow(false)
   return (
     <div data-cy="activity-item" className={activityCard}>
       <Link className={link} to={`/detail/${id}`} title={title}>
@@ -32,23 +30,22 @@ const ActivityCard: React.FC<ActivitiesData & { onRemove: () => void }> = ({
         <div data-cy="activity-item-date" className={activityTime}>
           {dateFormater(created_at)}
         </div>
+        {show && (
+          <Modal onClickOutSide={handleClose}>
+            <Alert
+              onNo={handleClose}
+              title={title}
+              type={'Activity'}
+              onYes={() => {
+                onRemove()
+                handleClose()
+              }}
+            />
+          </Modal>
+        )}
         <TrashButton
           dataCy="activity-item-delete-button"
-          onClick={() => {
-            confirmAlert({
-              customUI: ({ onClose }) => (
-                <Alert
-                  onNo={onClose}
-                  title={title}
-                  type={'Activity'}
-                  onYes={() => {
-                    onRemove()
-                    onClose()
-                  }}
-                />
-              ),
-            })
-          }}
+          onClick={() => setShow(true)}
         />
       </div>
     </div>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { confirmAlert } from 'react-confirm-alert'
 import { useParams, Navigate } from 'react-router-dom'
 import {
   ItemPayload,
@@ -9,10 +8,10 @@ import {
   UpdateItemPayloadWithId,
 } from 'todo-types'
 import { Empty } from '../../components/atoms'
+import { Modal } from '../../components/drawer'
 import { DetailLayout, MainLayout } from '../../components/layout'
 import {
   Alert,
-  AlertFail,
   Error,
   FormItem,
   Loading,
@@ -42,6 +41,8 @@ const Detail: React.FC = () => {
   const [title, setTitle] = useState<string | undefined>(undefined)
   const [showForm, setShowForm] = useState<boolean>(false)
   const [sortValue, setSortValue] = useState<SortMenuTypes>(defaultSortMenu)
+  const [showRemoveDialog, setShowRemoveDialog] =
+    useState<TodoItemTypes | null>(null)
   const [formInitialValue, setFormInitialValue] = useState<
     UpdateItemPayloadWithId | undefined
   >(undefined)
@@ -64,12 +65,9 @@ const Detail: React.FC = () => {
   }
   const handleTitleChange = async (text: string) => {
     if (id && !!text) {
-      const response = await updateActivityTitle(+id, { title: text })
-      if (!response) {
-        confirmAlert({
-          customUI: () => <AlertFail label="Gagal mengganti nama Activity" />,
-        })
-      }
+      await updateActivityTitle(+id, { title: text })
+      
+      
     }
   }
   const handleUpdate = async (payload: UpdateItemPayloadWithId) => {
@@ -114,9 +112,7 @@ const Detail: React.FC = () => {
       }
       setShowForm(false)
     } catch (error) {
-      confirmAlert({
-        customUI: () => <AlertFail label="Gagal menyimpan Item" />,
-      })
+
     }
   }
   if (!id || !Number(id)) return Navigate({ to: '/' })
@@ -147,25 +143,6 @@ const Detail: React.FC = () => {
     await updateItem(todo.id, payload)
   }
 
-  const handleConfirmRemove = async (props: TodoItemTypes) => {
-    confirmAlert({
-      customUI: ({ onClose }) => (
-        <Alert
-          onNo={onClose}
-          title={props.title}
-          type={'List Item'}
-          onYes={async () => {
-            if (todos) {
-              const newTodos = todos.filter(({ id }) => id !== props.id)
-              setTodos(newTodos)
-              onClose()
-              await removeItem(props.id)
-            }
-          }}
-        />
-      ),
-    })
-  }
 
   const handleOnSort = (sortValue: SortMenuTypes) => {
     setSortValue(sortValue)
@@ -221,13 +198,32 @@ const Detail: React.FC = () => {
         {todos && todos.length > 0 && (
           <TodoItem
             onEdit={handleEdit}
-            onRemove={handleConfirmRemove}
+            onRemove={setShowRemoveDialog}
             onCheck={handleCheck}
             todo_items={todos}
           />
         )}
         {todos && todos.length < 1 && (
           <Empty onClick={handleAdd} type={'List Item'} />
+        )}
+        {showRemoveDialog && (
+          <Modal>
+            <Alert
+              onNo={() => setShowRemoveDialog(null)}
+              title={showRemoveDialog.title}
+              type={'List Item'}
+              onYes={async () => {
+                if (todos) {
+                  const newTodos = todos.filter(
+                    ({ id }) => id !== showRemoveDialog.id
+                  )
+                  setTodos(newTodos)
+                  setShowRemoveDialog(null)
+                  await removeItem(showRemoveDialog.id)
+                }
+              }}
+            />
+          </Modal>
         )}
       </DetailLayout>
     </MainLayout>

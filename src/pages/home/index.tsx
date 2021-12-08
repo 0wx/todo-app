@@ -7,20 +7,19 @@ import {
   Loading,
   Error,
   AlertSuccess,
-  AlertFail,
 } from '../../components/molecules'
 import { nanoid } from 'nanoid'
 import { removeActivity } from '../../services/activity/removeActivity'
-import { confirmAlert } from 'react-confirm-alert'
 import { Empty } from '../../components/atoms'
 import { sortByNewId } from '../../helpers/sort'
 import { intialActivities } from '../../const'
+import { Modal } from '../../components/drawer'
 
 const Home: React.FC = () => {
   const [activities, setActivities] = useState<Activities | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<boolean>(false)
-
+  const [showRemoveStatus, setShowRemoveStatus] = useState<boolean>(false)
   const handlingAdd = async () => {
     if (activities) {
       if (activities.total < activities.limit) {
@@ -34,16 +33,10 @@ const Home: React.FC = () => {
 
   const handlingRemove = async (id: number) => {
     setLoading(true)
+    setShowRemoveStatus(true)
     const response = await removeActivity(id)
     setLoading(false)
-    confirmAlert({
-      customUI: () =>
-        response ? (
-          <AlertSuccess label="Activity berhasil dihapus" />
-        ) : (
-          <AlertFail label="Gagal Hapus Activity" />
-        ),
-    })
+    
 
     if (activities && response) {
       const newData = activities.data.filter((act) => act.id !== id)
@@ -84,6 +77,7 @@ const Home: React.FC = () => {
         {!loading && activities && activities.data.length < 1 && (
           <Empty type="Activity" onClick={handlingAdd} />
         )}
+        {showRemoveStatus && <Modal onClickOutSide={() => setShowRemoveStatus(false)}><AlertSuccess label="Activity berhasil dihapus" /></Modal>}
         {error && <Error />}
       </ActivityLayout>
     </MainLayout>
