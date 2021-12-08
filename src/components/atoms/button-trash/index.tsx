@@ -12,13 +12,8 @@ const TrashButton: React.FC<TrashButtonProps> = ({
   size = 24,
 }) => {
   return (
-    <div data-cy={dataCy} style={{ display: 'flex' }}>
-      <Trash
-        width={size}
-        height={size}
-        style={{ cursor: 'pointer' }}
-        onClick={onClick}
-      />
+    <div data-cy={dataCy} onClick={onClick} style={{ display: 'flex' }}>
+      <Trash width={size} height={size} style={{ cursor: 'pointer' }} />
     </div>
   )
 }

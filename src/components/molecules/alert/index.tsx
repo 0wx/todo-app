@@ -23,7 +23,7 @@ const Alert: React.FC<AlertProps> = ({
 }) => {
   const _caption = `Apakah anda yakin menghapus ${type}`
   return (
-    <div className={container}>
+    <div data-cy="modal-delete" className={container}>
       <div className={logo} data-cy="modal-delete-icon">
         <AlertLogo />
       </div>
