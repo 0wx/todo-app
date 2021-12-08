@@ -63,7 +63,7 @@ const Detail: React.FC = () => {
     setShowForm(true)
   }
   const handleTitleChange = async (text: string) => {
-    if (id) {
+    if (id && !!text) {
       const response = await updateActivityTitle(+id, { title: text })
       if (!response) {
         confirmAlert({

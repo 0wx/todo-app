@@ -20,7 +20,11 @@ const EditableText: React.FC<EditableTextProps> = ({
   }
 
   const handleOutFocus = () => {
-    onChange(textValue)
+    if (!!textValue) {
+      onChange(textValue)
+      setIsEditing(false)
+      return
+    }
     setIsEditing(false)
   }
   if (!isEditing)
