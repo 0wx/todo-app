@@ -9,9 +9,9 @@ interface EmptyProps {
 const { person } = styles
 const Empty: React.FC<EmptyProps> = ({ onClick, type }) => {
   return (
-    <div className={person} onClick={onClick}>
-      {type === 'Activity' && <PersonActivity />}
-      {type === 'List Item' && <PersonList />}
+    <div className={person}>
+      {type === 'Activity' && <PersonActivity onClick={onClick} />}
+      {type === 'List Item' && <PersonList onClick={onClick} />}
     </div>
   )
 }
