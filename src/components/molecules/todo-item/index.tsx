@@ -1,7 +1,4 @@
-import {
-  
-  TodoItem as TodoItemTypes,
-} from 'todo-types'
+import { TodoItem as TodoItemTypes } from 'todo-types'
 import { nanoid } from 'nanoid'
 import { priority } from '../../../const'
 import { EditButton, InputCheckbox, Label, TrashButton } from '../../atoms'
@@ -23,25 +20,38 @@ const TodoItem: React.FC<TodoItemProps> = ({
   return (
     <div className={todoContainer}>
       {todo_items.map((v) => (
-        <div className={todo} key={nanoid()}>
+        <div data-cy="todo-item" className={todo} key={nanoid()}>
           <div className={leftTodo}>
             <InputCheckbox
               is_active={!!v.is_active}
               onCheck={() => onCheck(v)}
             />
             <Label
+              dataCy="todo-item-priority-indicator"
               color={
                 priority.find(({ value }) => value === v.priority)?.color ||
                 'white'
               }
             >
-              <span className={!v.is_active ? notActive : ''}>{v.title}</span>
+              <span
+                data-cy="todo-item-title"
+                className={!v.is_active ? notActive : ''}
+              >
+                {v.title}
+              </span>
             </Label>
 
-            <EditButton size={15} onClick={() => onEdit(v)} />
+            <EditButton
+              dataCy="todo-item-edit-button"
+              size={15}
+              onClick={() => onEdit(v)}
+            />
           </div>
           <div className={rightTodo}>
-            <TrashButton onClick={() => onRemove(v)} />
+            <TrashButton
+              dataCy="todo-item-delete-button"
+              onClick={() => onRemove(v)}
+            />
           </div>
         </div>
       ))}

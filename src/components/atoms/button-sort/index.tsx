@@ -7,7 +7,7 @@ interface SortButtonProps {
 const { sortButtonContainer } = styles
 const SortButton: React.FC<SortButtonProps> = ({ onClick }) => {
   return (
-    <div className={sortButtonContainer} onClick={onClick}>
+    <div data-cy="todo-sort-button" className={sortButtonContainer} onClick={onClick}>
       <SortButtonSVG />
     </div>
   )

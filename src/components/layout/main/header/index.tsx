@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 const { header, title } = styles
 const MainHeader: React.FC = () => {
   return (
-    <div className={header}>
+    <div data-cy="header-background" className={header}>
       <div>
         <Link to="/" style={{textDecoration: 'none'}}>
-          <span className={title}>TO DO LIST APP</span>
+          <span data-cy="header-title" className={title}>TO DO LIST APP</span>
         </Link>
       </div>
     </div>

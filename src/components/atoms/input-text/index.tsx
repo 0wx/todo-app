@@ -6,6 +6,8 @@ interface InputTextProps {
   onChange: (text: string) => void
   placeholder?: string
   value?: string
+  dataCyLabel?: string
+  dataCyInput?: string
 }
 const { container, inputText, _label } = styles
 const InputText: React.FC<InputTextProps> = ({
@@ -13,12 +15,19 @@ const InputText: React.FC<InputTextProps> = ({
   onChange,
   placeholder,
   value,
+  dataCyLabel,
+  dataCyInput,
 }) => {
   const [textValue, setTextValue] = useState<string>(value || '')
   return (
     <div className={container}>
-      {label && <span className={_label}>{label}</span>}
+      {label && (
+        <span className={_label} data-cy={dataCyLabel}>
+          {label}
+        </span>
+      )}
       <input
+        data-cy={dataCyInput}
         autoFocus
         className={inputText}
         type="text"

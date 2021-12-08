@@ -15,7 +15,7 @@ interface BackProps {
 const { icon } = styles
 const ButtonBack: React.FC<BackProps> = ({ to, size, style }) => {
   return (
-    <Link to={to}>
+    <Link to={to} data-cy="todo-back-button">
       <FontAwesomeIcon
         className={icon}
         icon={faChevronLeft}

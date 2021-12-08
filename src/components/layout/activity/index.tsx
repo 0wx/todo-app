@@ -11,8 +11,8 @@ const ActivityLayout: React.FC<Ac> = ({ children, onAdd, isDisabled }) => {
   return (
     <div className={container}>
       <div className={header}>
-        <span className={activity}>Activity</span>
-        <ButtonAdd isDisabled={isDisabled} onClick={onAdd} />
+        <span data-cy="activity-title" className={activity}>Activity</span>
+        <ButtonAdd dataCy="activity-add-button" isDisabled={isDisabled} onClick={onAdd} />
       </div>
       <div className={content}>{children}</div>
     </div>

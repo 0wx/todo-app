@@ -5,7 +5,7 @@ import { Selected } from '../../../assets/sort-menu'
 import { SortMenuTypes } from 'todo-types'
 import { useEffect, useRef } from 'react'
 
-const { dropDownMenuContainer, menuContainer, menuLeft, menuRight } = styles
+const { dropDownMenuContainer, menuContainer, menuLeft, menuRight, icon } = styles
 
 interface DropmenuProps {
   selectedValue?: SortMenuTypes
@@ -41,14 +41,19 @@ const DropdownMenu: React.FC<DropmenuProps> = ({
         const isSelected = selectedValue.value === value
         return (
           <div
+            data-cy="sort-selection"
             onClick={() => onSelect(menu)}
             key={nanoid()}
             className={menuContainer}
           >
             <div className={menuLeft}>
-              <Icon />
+              <div
+              className={icon}
+               data-cy="sort-selection-icon">
+                <Icon />
+              </div>
 
-              <span>{label}</span>
+              <span data-cy="sort-selection-title">{label}</span>
             </div>
             <div className={menuRight}>{isSelected && <Selected />}</div>
           </div>

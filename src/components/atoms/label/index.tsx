@@ -1,14 +1,16 @@
 interface LabelProps {
   color: string
   size?: string
+  dataCy: string
 }
 
-const Label: React.FC<LabelProps> = ({ children, color, size = '14px' }) => {
+const Label: React.FC<LabelProps> = ({ dataCy, children, color, size = '14px' }) => {
   return (
     <div
       style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
     >
       <div
+        data-cy={dataCy}
         style={{
           backgroundColor: color,
           borderRadius: '100%',

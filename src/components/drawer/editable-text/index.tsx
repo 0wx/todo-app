@@ -30,10 +30,15 @@ const EditableText: React.FC<EditableTextProps> = ({
   if (!isEditing)
     return (
       <div className={container}>
-        <span onClick={() => setIsEditing(true)} className={className || ''}>
+        <span
+          data-cy="todo-title"
+          onClick={() => setIsEditing(true)}
+          className={className || ''}
+        >
           {text}
         </span>
         <EditButton
+          data-cy="todo-title-edit-button"
           onClick={() => {
             setIsEditing(true)
           }}
@@ -52,6 +57,7 @@ const EditableText: React.FC<EditableTextProps> = ({
         onChange={handleChange}
       />
       <EditButton
+        data-cy="todo-title-edit-button"
         onClick={() => {
           setIsEditing(true)
         }}

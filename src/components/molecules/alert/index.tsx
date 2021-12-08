@@ -24,20 +24,24 @@ const Alert: React.FC<AlertProps> = ({
   const _caption = `Apakah anda yakin menghapus ${type}`
   return (
     <div className={container}>
-      <div className={logo}>
+      <div className={logo} data-cy="modal-delete-icon">
         <AlertLogo />
       </div>
       <div className={text}>
         <div className={caption}>{_caption}</div>
-        <div className={targetTitle}>“{title}”</div>
+        <div data-cy="modal-delete-title" className={targetTitle}>
+          “{title}”
+        </div>
       </div>
       <div className={btn}>
         <Button
+          dataCy="modal-delete-cancel-button"
           onClick={onNo}
           label={labelNo}
           style={{ color: '#4a4a4a', backgroundColor: '#f4f4f4' }}
         />
         <Button
+        dataCy="modal-delete-confirm-button"
           onClick={onYes}
           label={labelYes}
           style={{ color: '#fff', backgroundColor: '#ED4C5C' }}

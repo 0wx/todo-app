@@ -40,17 +40,27 @@ const FormItem: React.FC<FormItemProps> = ({
       <div className={container}>
         <div className={section}>
           <section className={head}>
-            <div>{initialValue ? 'Edit Item' : 'Tambah List Item'}</div>
-            <ButtonClose style={{ marginRight: '10px' }} onClick={onClose} />
+            <div data-cy="modal-add-title">
+              {initialValue ? 'Edit Item' : 'Tambah List Item'}
+            </div>
+            <ButtonClose
+              data-cy="modal-add-close-button"
+              style={{ marginRight: '10px' }}
+              onClick={onClose}
+            />
           </section>
           <section className={form}>
             <InputText
+              dataCyLabel="modal-add-name-title"
+              dataCyInput="modal-add-name-input"
               placeholder="Tambahkan nama list item"
               label="Nama List Item"
               onChange={handleItemName}
               value={initialValue?.title}
             />
             <Select
+              dataCyLabel="modal-add-priority-title"
+              dataCyInput="modal-add-priority-item"
               option={priority}
               label="Priority"
               onChange={handlePriorityChange}
@@ -59,6 +69,7 @@ const FormItem: React.FC<FormItemProps> = ({
 
           <section className={footer}>
             <Button
+              dataCy="modal-add-save-button"
               label={'Simpan'}
               isDisabled={isDisabled}
               onClick={() => {

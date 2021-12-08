@@ -7,8 +7,14 @@ import { Alert } from '../'
 import { confirmAlert } from 'react-confirm-alert'
 import '../../../styles/react-confirm-alert.scss'
 
-const { activityCard, activityBody, cardFooter, activityTime, link } =
-  styles
+const {
+  activityCard,
+  activityBody,
+  cardFooter,
+  activityTime,
+  link,
+} = styles
+
 const ActivityCard: React.FC<ActivitiesData & { onRemove: () => void }> = ({
   id,
   title,
@@ -16,15 +22,18 @@ const ActivityCard: React.FC<ActivitiesData & { onRemove: () => void }> = ({
   onRemove,
 }) => {
   return (
-    <div className={activityCard}>
+    <div data-cy="activity-item" className={activityCard}>
       <Link className={link} to={`/detail/${id}`} title={title}>
         <div className={activityBody}>
-          <h4>{title}</h4>
+          <h4 data-cy="activity-item-title">{title}</h4>
         </div>
       </Link>
       <div className={cardFooter}>
-        <div className={activityTime}>{dateFormater(created_at)}</div>
+        <div data-cy="activity-item-date" className={activityTime}>
+          {dateFormater(created_at)}
+        </div>
         <TrashButton
+          dataCy="activity-item-delete-button"
           onClick={() => {
             confirmAlert({
               customUI: ({ onClose }) => (

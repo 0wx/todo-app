@@ -3,11 +3,16 @@ import { ReactComponent as PencilLogo } from '../../../assets/pencil.svg'
 interface EditButtonProps {
   onClick: () => void
   size?: number
+  dataCy?: string
 }
 
-const EditButton: React.FC<EditButtonProps> = ({ onClick, size = 24 }) => {
+const EditButton: React.FC<EditButtonProps> = ({
+  dataCy,
+  onClick,
+  size = 24,
+}) => {
   return (
-    <div style={{ cursor: 'pointer' }} onClick={onClick}>
+    <div data-cy={dataCy} style={{ cursor: 'pointer' }} onClick={onClick}>
       <PencilLogo width={size} height={size} />
     </div>
   )

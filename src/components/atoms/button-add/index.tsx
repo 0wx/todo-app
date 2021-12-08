@@ -7,10 +7,12 @@ const { btn, label, disable } = styles
 interface Button {
   onClick: () => void
   isDisabled: boolean
+  dataCy?: string
 }
-const ButtonAdd: React.FC<Button> = ({ onClick, isDisabled }) => {
+const ButtonAdd: React.FC<Button> = ({ dataCy, onClick, isDisabled }) => {
   return (
     <button
+      data-cy={dataCy}
       className={`${btn} ${isDisabled ? disable : ''}`.trim()}
       onClick={onClick}
       disabled={isDisabled}

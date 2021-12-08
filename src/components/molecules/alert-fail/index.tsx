@@ -6,11 +6,11 @@ interface AlertProps {
   label: string
 }
 const AlertSuccess: React.FC<AlertProps> = ({ label }) => (
-  <div className={container}>
-    <div>
+  <div data-cy="modal-information" className={container}>
+    <div data-cy="modal-information-icon">
       <FailLogo />
     </div>
-    <span>{label}</span>
+    <span data-cy="modal-information-title">{label}</span>
   </div>
 )
 

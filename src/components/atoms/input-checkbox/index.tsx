@@ -11,7 +11,7 @@ const InputCheckbox: React.FC<InputCheckboxProps> = ({ onCheck, is_active }) => 
   
   return (
     <div className={inputContainer}>
-      <input type={'checkbox'} defaultChecked={!is_active} onChange={onCheck} />
+      <input data-cy="todo-item-checkbox" type={'checkbox'} defaultChecked={!is_active} onChange={onCheck} />
     </div>
   )
 }

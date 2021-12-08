@@ -68,7 +68,7 @@ const DetailLayout: React.FC<DetailProps> = ({
               )}
             </div>
           </div>
-          <ButtonAdd isDisabled={!title} onClick={onAdd} />
+          <ButtonAdd dataCy="todo-add-button" isDisabled={!title} onClick={onAdd} />
         </div>
       </div>
       <div className={content}>{children}</div>
