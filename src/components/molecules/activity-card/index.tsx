@@ -17,7 +17,7 @@ const ActivityCard: React.FC<ActivitiesData & { onRemove: () => void }> = ({
 }) => {
   return (
     <div className={activityCard}>
-      <Link className={link} to={`/detail/${id}`}>
+      <Link className={link} to={`/detail/${id}`} title={title}>
         <div className={activityBody}>
           <h4>{title}</h4>
         </div>

@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  border-radius: 10px;
+  align-items: center;
+  padding: 5px 20px;
+  background-color: #eee;
+  height: 50px;
+  span {
+    margin-left: 10px;
+  }
+  div {
+    display: flex;
+  }
+}

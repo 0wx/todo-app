@@ -14,9 +14,19 @@
 }
 .btn {
   display: flex;
+  align-items: center;
 
+  button {
+    margin: 0 2px;
+  }
 }
 
-.overlay {
-  background-color: black;
+.text {
+  margin: 10px 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .targetTitle {
+    font-weight: 700;
+  }
 }

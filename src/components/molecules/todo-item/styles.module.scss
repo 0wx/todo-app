@@ -1,0 +1,41 @@
+.todoContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  width: 100%;
+  .todo {
+    margin-bottom: 20px;
+    height: 80px;
+    background: #ffffff;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+  }
+}
+
+.leftTodo {
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    font-family: Poppins;
+    font-style: normal;
+  }
+}
+
+.notActive {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+
+  text-decoration-line: line-through;
+
+  color: #888888;
+}

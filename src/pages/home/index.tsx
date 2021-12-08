@@ -2,9 +2,19 @@ import { MainLayout, ActivityLayout } from '../../components/layout'
 import { useEffect, useState } from 'react'
 import { Activities } from 'todo-types'
 import { addActivities, getActivities } from '../../services'
-import { ActivityCard, Loading, Error } from '../../components/molecules'
+import {
+  ActivityCard,
+  Loading,
+  Error,
+  AlertSuccess,
+  AlertFail,
+} from '../../components/molecules'
 import { nanoid } from 'nanoid'
-const intialActivities = { title: 'New Activity', email: 'xvnyan@gmail.com' }
+import { removeActivity } from '../../services/activity/removeActivity'
+import { confirmAlert } from 'react-confirm-alert'
+import { Empty } from '../../components/atoms'
+import { sortByNewId } from '../../helpers/sort'
+import { intialActivities } from '../../const'
 
 const Home: React.FC = () => {
   const [activities, setActivities] = useState<Activities | null>(null)
@@ -16,20 +26,38 @@ const Home: React.FC = () => {
       if (activities.total < activities.limit) {
         const { created_at, title, id } = await addActivities(intialActivities)
 
-        const newData = [...activities.data, { created_at, title, id }]
+        const newData = [{ created_at, title, id }, ...activities.data]
         setActivities({ ...activities, data: newData })
       } else alert('Limit')
+    }
+  }
+
+  const handlingRemove = async (id: number) => {
+    setLoading(true)
+    const response = await removeActivity(id)
+    setLoading(false)
+    confirmAlert({
+      customUI: () =>
+        response ? (
+          <AlertSuccess label="Activity berhasil dihapus" />
+        ) : (
+          <AlertFail label="Gagal Hapus Activity" />
+        ),
+    })
+
+    if (activities && response) {
+      const newData = activities.data.filter((act) => act.id !== id)
+      setActivities({ ...activities, data: newData })
     }
   }
   useEffect(() => {
     if (!activities)
       getActivities()
         .then((act) => {
-          console.log(act)
           setActivities(act)
           setLoading(false)
         })
-        .catch((e) => {
+        .catch(() => {
           setLoading(false)
           setError(true)
         })
@@ -39,13 +67,23 @@ const Home: React.FC = () => {
     <MainLayout>
       <ActivityLayout onAdd={handlingAdd} isDisabled={error || loading}>
         {loading && <Loading />}
-        {activities &&
-          activities.data.map((act) => {
-            return <ActivityCard key={nanoid()} {...act} onRemove={() => {
-              
-              console.log(act)
-            }}/>
+        {!loading &&
+          activities &&
+          activities.data.length > 0 &&
+          activities.data.sort(sortByNewId).map((act) => {
+            return (
+              <ActivityCard
+                key={nanoid()}
+                {...act}
+                onRemove={() => {
+                  handlingRemove(act.id)
+                }}
+              />
+            )
           })}
+        {!loading && activities && activities.data.length < 1 && (
+          <Empty type="Activity" onClick={handlingAdd} />
+        )}
         {error && <Error />}
       </ActivityLayout>
     </MainLayout>

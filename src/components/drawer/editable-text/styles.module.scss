@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  span {
+    margin: 3px 20px;
+    padding: 0 2px;
+  }
+  input {
+    width: 100%;
+  }
+}

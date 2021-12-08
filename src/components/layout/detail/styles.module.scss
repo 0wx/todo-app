@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-grow: 1;
+  .header {
+    margin: 40px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.text {
+  background-color: #eee;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+input.text {
+  font-size: 36px;
+  font-family: Poppins;
+  padding-left: 20px;
+}
+input.text:focus {
+  outline: none !important;
+  outline-style: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+}
+.headerRight {
+  display: flex;
+  align-items: center;
+}
+.sortButton {
+  margin-right: 12px;
+  cursor: pointer;
+}
+.dropMenu {
+  position: absolute;
+  margin-top: 8px;
+  background-color: #fff;
+  border-radius: 6px;
+  width: 235px;
+}

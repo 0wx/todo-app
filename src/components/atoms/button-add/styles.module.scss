@@ -22,7 +22,8 @@
 }
 .disable {
   cursor: not-allowed;
-  background-color: #aaa;
+  background-color: #16abf8;
+  opacity: 0.2;
 }
 
 @media only screen and (max-width: 600px) {
@@ -30,7 +31,6 @@
     display: none;
   }
   .btn {
-
     min-width: 0;
   }
 }

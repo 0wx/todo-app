@@ -4,7 +4,7 @@
   width: 100%;
   flex-grow: 1;
   .header {
-    margin: 43px 10px;
+    margin: 40px 10px;
     display: flex;
     justify-content: space-between;
     span.activity {
@@ -15,7 +15,6 @@
 
   .content {
     display: flex;
-    flex-grow: 1;
     flex-wrap: wrap;
   }
 }

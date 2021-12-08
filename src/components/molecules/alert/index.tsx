@@ -11,7 +11,7 @@ interface AlertProps {
   labelNo?: string
 }
 
-const { container, logo, caption, targetTitle, btn } = styles
+const { container, logo, caption, targetTitle, btn, text } = styles
 
 const Alert: React.FC<AlertProps> = ({
   onYes,
@@ -27,9 +27,9 @@ const Alert: React.FC<AlertProps> = ({
       <div className={logo}>
         <AlertLogo />
       </div>
-      <div>
+      <div className={text}>
         <div className={caption}>{_caption}</div>
-        <div className={targetTitle}>"{title}"</div>
+        <div className={targetTitle}>“{title}”</div>
       </div>
       <div className={btn}>
         <Button

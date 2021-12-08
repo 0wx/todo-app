@@ -12,7 +12,7 @@ const ActivityLayout: React.FC<Ac> = ({ children, onAdd, isDisabled }) => {
     <div className={container}>
       <div className={header}>
         <span className={activity}>Activity</span>
-        <ButtonAdd isDisabled={isDisabled} onClick={onAdd}/>
+        <ButtonAdd isDisabled={isDisabled} onClick={onAdd} />
       </div>
       <div className={content}>{children}</div>
     </div>
