@@ -12,6 +12,7 @@ import { Modal } from '../../components/drawer'
 import { DetailLayout, MainLayout } from '../../components/layout'
 import {
   Alert,
+  AlertSuccess,
   Error,
   FormItem,
   Loading,
@@ -41,11 +42,14 @@ const Detail: React.FC = () => {
   const [title, setTitle] = useState<string | undefined>(undefined)
   const [showForm, setShowForm] = useState<boolean>(false)
   const [sortValue, setSortValue] = useState<SortMenuTypes>(defaultSortMenu)
+  const [showSuccessDialog, setShowSuccessDialog] = useState<boolean>(false)
+
   const [showRemoveDialog, setShowRemoveDialog] =
     useState<TodoItemTypes | null>(null)
   const [formInitialValue, setFormInitialValue] = useState<
     UpdateItemPayloadWithId | undefined
   >(undefined)
+
   useEffect(() => {
     if (!todos && id && Number(id))
       getActivityGroupDetail(+id)
@@ -66,8 +70,6 @@ const Detail: React.FC = () => {
   const handleTitleChange = async (text: string) => {
     if (id && !!text) {
       await updateActivityTitle(+id, { title: text })
-      
-      
     }
   }
   const handleUpdate = async (payload: UpdateItemPayloadWithId) => {
@@ -111,9 +113,7 @@ const Detail: React.FC = () => {
         setTodos(newTodos)
       }
       setShowForm(false)
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }
   if (!id || !Number(id)) return Navigate({ to: '/' })
 
@@ -142,7 +142,6 @@ const Detail: React.FC = () => {
 
     await updateItem(todo.id, payload)
   }
-
 
   const handleOnSort = (sortValue: SortMenuTypes) => {
     setSortValue(sortValue)
@@ -206,8 +205,13 @@ const Detail: React.FC = () => {
         {todos && todos.length < 1 && (
           <Empty onClick={handleAdd} type={'List Item'} />
         )}
+        {showSuccessDialog && (
+          <Modal onClickOutSide={() => setShowSuccessDialog(false)}>
+            <AlertSuccess label="Item berhasil dihapus" />
+          </Modal>
+        )}
         {showRemoveDialog && (
-          <Modal>
+          <Modal onClickOutSide={() => setShowRemoveDialog(null)}>
             <Alert
               onNo={() => setShowRemoveDialog(null)}
               title={showRemoveDialog.title}

@@ -35,7 +35,7 @@ const DropdownMenu: React.FC<DropmenuProps> = ({
     }
   }, [onClose, ref])
   return (
-    <div ref={ref} className={dropDownMenuContainer}>
+    <div ref={ref} data-cy="sort-parent" className={dropDownMenuContainer}>
       {sortMenu.map((menu) => {
         const { label, Icon, value } = menu
         const isSelected = selectedValue.value === value
