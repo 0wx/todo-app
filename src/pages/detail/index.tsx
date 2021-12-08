@@ -223,6 +223,7 @@ const Detail: React.FC = () => {
                   )
                   setTodos(newTodos)
                   setShowRemoveDialog(null)
+                  setShowSuccessDialog(true)
                   await removeItem(showRemoveDialog.id)
                 }
               }}
