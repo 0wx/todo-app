@@ -37,7 +37,7 @@ const FormItem: React.FC<FormItemProps> = ({
   }
   return (
     <Modal style={{ height: '403px', width: '830px' }} onClickOutSide={onClose}>
-      <div className={container}>
+      <div data-cy="modal-add" className={container}>
         <div className={section}>
           <section className={head}>
             <div data-cy="modal-add-title">
