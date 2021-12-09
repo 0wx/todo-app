@@ -9,7 +9,9 @@ interface ButtonProps {
 
 const ButtonClose: React.FC<ButtonProps> = (props) => {
   return (
-    <FontAwesomeIcon style={{ cursor: 'pointer' }} icon={faTimes} {...props} />
+    <div {...props} style={{ cursor: 'pointer' }}>
+      <FontAwesomeIcon icon={faTimes} />
+    </div>
   )
 }
 
