@@ -4,7 +4,7 @@ import { Activities } from 'todo-types'
 import { addActivities, getActivities } from '../../services'
 import {
   ActivityCard,
-  Loading,
+  // Loading,
   Error,
   AlertSuccess,
 } from '../../components/molecules'
@@ -17,7 +17,7 @@ import { Modal } from '../../components/drawer'
 
 const Home: React.FC = () => {
   const [activities, setActivities] = useState<Activities | null>(null)
-  const [loading, setLoading] = useState<boolean>(true)
+  // const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<boolean>(false)
   const [showRemoveStatus, setShowRemoveStatus] = useState<boolean>(false)
   const handlingAdd = async () => {
@@ -32,11 +32,10 @@ const Home: React.FC = () => {
   }
 
   const handlingRemove = async (id: number) => {
-    setLoading(true)
+    // setLoading(true)
     setShowRemoveStatus(true)
     const response = await removeActivity(id)
-    setLoading(false)
-    
+    // setLoading(false)
 
     if (activities && response) {
       const newData = activities.data.filter((act) => act.id !== id)
@@ -48,36 +47,51 @@ const Home: React.FC = () => {
       getActivities()
         .then((act) => {
           setActivities(act)
-          setLoading(false)
+          // setLoading(false)
         })
         .catch(() => {
-          setLoading(false)
+          // setLoading(false)
           setError(true)
         })
   }, [activities])
 
   return (
     <MainLayout>
-      <ActivityLayout onAdd={handlingAdd} isDisabled={error || loading}>
-        {loading && <Loading />}
-        {!loading &&
+      <ActivityLayout
+        onAdd={handlingAdd}
+        isDisabled={
+          error
+          //|| loading
+        }
+      >
+        {/* {loading && <Loading />} */}
+        {
+          // !loading &&
           activities &&
-          activities.data.length > 0 &&
-          activities.data.sort(sortByNewId).map((act) => {
-            return (
-              <ActivityCard
-                key={nanoid()}
-                {...act}
-                onRemove={() => {
-                  handlingRemove(act.id)
-                }}
-              />
-            )
-          })}
-        {!loading && activities && activities.data.length < 1 && (
-          <Empty type="Activity" onClick={handlingAdd} />
+            activities.data.length > 0 &&
+            activities.data.sort(sortByNewId).map((act) => {
+              return (
+                <ActivityCard
+                  key={nanoid()}
+                  {...act}
+                  onRemove={() => {
+                    handlingRemove(act.id)
+                  }}
+                />
+              )
+            })
+        }
+        {
+          //!loading &&
+          activities && activities.data.length < 1 && (
+            <Empty type="Activity" onClick={handlingAdd} />
+          )
+        }
+        {showRemoveStatus && (
+          <Modal onClickOutSide={() => setShowRemoveStatus(false)}>
+            <AlertSuccess label="Activity berhasil dihapus" />
+          </Modal>
         )}
-        {showRemoveStatus && <Modal onClickOutSide={() => setShowRemoveStatus(false)}><AlertSuccess label="Activity berhasil dihapus" /></Modal>}
         {error && <Error />}
       </ActivityLayout>
     </MainLayout>

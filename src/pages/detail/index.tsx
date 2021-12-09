@@ -15,7 +15,7 @@ import {
   AlertSuccess,
   Error,
   FormItem,
-  Loading,
+  // Loading,
   TodoItem,
 } from '../../components/molecules'
 import { defaultSortMenu } from '../../const'
@@ -37,7 +37,7 @@ import { updateActivityTitle } from '../../services/activity/updateActivityTitle
 const Detail: React.FC = () => {
   const { id } = useParams()
   const [todos, setTodos] = useState<TodoItemTypes[] | undefined>()
-  const [loading, setLoading] = useState<boolean>(true)
+  // const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<boolean>(false)
   const [title, setTitle] = useState<string | undefined>(undefined)
   const [showForm, setShowForm] = useState<boolean>(false)
@@ -56,10 +56,10 @@ const Detail: React.FC = () => {
         .then((data) => {
           setTodos(data.todo_items)
           setTitle(data.title)
-          setLoading(false)
+          // setLoading(false)
         })
         .catch(() => {
-          setLoading(false)
+          // setLoading(false)
           setError(true)
         })
   }, [todos, id])
@@ -72,28 +72,25 @@ const Detail: React.FC = () => {
       await updateActivityTitle(+id, { title: text })
     }
   }
-  const handleUpdate = async (payload: UpdateItemPayloadWithId) => {
+  const handleUpdate = (payload: UpdateItemPayloadWithId) => {
     const { title, is_active, priority } = payload
     setFormInitialValue(undefined)
-    const response = await updateItem(payload.id, {
+    setTodos((todos) => {
+      if (!todos) return todos
+      return todos.map((todo) => {
+        if (todo.id === payload.id) {
+          todo.title = payload.title
+          todo.priority = payload.priority
+        }
+        return todo
+      })
+    })
+    setShowForm(false)
+    updateItem(payload.id, {
       title,
       is_active,
       priority,
     })
-
-    if (response) {
-      setTodos((todos) => {
-        if (!todos) return todos
-        return todos.map((todo) => {
-          if (todo.id === response.id) {
-            todo.title = response.title
-            todo.priority = response.priority
-          }
-          return todo
-        })
-      })
-      setShowForm(false)
-    }
   }
   const handleSubmit = async (payload: ItemPayload) => {
     try {
@@ -191,7 +188,7 @@ const Detail: React.FC = () => {
             initialValue={formInitialValue}
           />
         )}
-        {loading && <Loading />}
+        {/* {loading && <Loading />} */}
         {error && <Error />}
 
         {todos && todos.length > 0 && (
